@@ -19,7 +19,7 @@ app.use(
 	"/",
 	router.get("/sobre", (req, res) => {
 		res.status(200).send({
-			nome: "API-CHAT",
+			nome: "CHAT-API",
 			versão: "1.0.0",
 			autor: "zrdax",
 		});
@@ -109,6 +109,19 @@ app.use(
 			req.query.idsala,
 			req.query.timestamp,
 		);
+		res.status(200).send(resp);
+	}),
+);
+
+app.use(
+	"/",
+	router.delete("/sala/sair", async (req, res) => {
+		if (
+			!token.checktoken(req.headers.token, req.headers.iduser, req.headers.nick)
+		) {
+			return false;
+		}
+		const resp = await salaController.sair(req.query.iduser, req.query.idSala);
 		res.status(200).send(resp);
 	}),
 );
