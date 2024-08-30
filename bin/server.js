@@ -1,7 +1,7 @@
 require("dotenv").config();
 const app = require("../src/routers/api");
 
-let port = process.env.API_PORT || 5000;
+const port = process.env.API_PORT || 5000;
 
 app.listen(port);
 

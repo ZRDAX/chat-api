@@ -1,8 +1,8 @@
-var express = require("express");
 const token = require("../../util/token");
 const usuarioController = require("../controllers/usuarioController");
 const salaController = require("../controllers/salaController");
 
+var express = require("express");
 var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -33,7 +33,7 @@ app.use(
 			await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nick,
+				req.headers.nickname,
 			)
 		) {
 			let resp = await salaController.get();
@@ -47,7 +47,7 @@ app.use(
 app.use(
 	"/",
 	router.post("/entrar", async (req, res) => {
-		let resp = await usuarioController.entrar(req.body.nick);
+		let resp = await usuarioController.entrar(req.body.nickname);
 		res.status(200).send(resp);
 	}),
 );
@@ -59,7 +59,7 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nick,
+				req.headers.nickname,
 			))
 		) {
 			return false;
@@ -79,13 +79,13 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nick,
+				req.headers.nickname,
 			))
 		) {
 			return false;
 		}
 		let resp = await salaController.enviarMensagem(
-			req.headers.nick,
+			req.headers.nickname,
 			req.body.msg,
 			req.body.idsala,
 		);
@@ -100,7 +100,7 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nick,
+				req.headers.nickname,
 			))
 		) {
 			return false;
@@ -117,11 +117,32 @@ app.use(
 	"/",
 	router.delete("/sala/sair", async (req, res) => {
 		if (
-			!token.checktoken(req.headers.token, req.headers.iduser, req.headers.nick)
+			!token.checktoken(
+				req.headers.token,
+				req.headers.iduser,
+				req.headers.nickname,
+			)
 		) {
 			return false;
 		}
 		const resp = await salaController.sair(req.query.iduser, req.query.idSala);
+		res.status(200).send(resp);
+	}),
+);
+
+app.use(
+	"/",
+	router.delete("/sair", async (req, res) => {
+		if (
+			!token.checktoken(
+				req.headers.token,
+				req.headers.iduser,
+				req.headers.nickname,
+			)
+		) {
+			return false;
+		}
+		const resp = await usuarioController.sairChat(req.headers.iduser);
 		res.status(200).send(resp);
 	}),
 );

@@ -15,3 +15,8 @@ exports.entrar = async (nickname) => {
 		};
 	}
 };
+
+exports.sairChat = async (iduser) => {
+	let resp = await usuarioModel.removerUsuario(iduser);
+	return "Quit chat";
+};

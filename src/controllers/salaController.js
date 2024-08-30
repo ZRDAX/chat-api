@@ -7,16 +7,15 @@ exports.get = async (req, res) => {
 
 exports.enviarMensagem = async (nickname, msg, idsala) => {
 	const sala = await salaModel.buscarSala(idsala);
-	if (!Array.isArray(sala.msgs)) {
+	if (!sala.msgs) {
 		sala.msgs = [];
 	}
-	let timestamp = Date.now();
+	timestamp = Date.now();
 	sala.msgs.push({
-		nickname: nickname,
-		msg: msg,
 		timestamp: timestamp,
+		msg: msg,
+		nick: nick,
 	});
-	console.log(sala);
 	let resp = await salaModel.atualizarMensagens(sala);
 	return { msg: "OK", timestamp: timestamp };
 };
