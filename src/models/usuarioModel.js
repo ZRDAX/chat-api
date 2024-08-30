@@ -1,7 +1,7 @@
 const db = require("./db");
 
-async function registrarUsuario(nickname) {
-	return await db.insertOne("usuarios", { nickname: nickname });
+async function registrarUsuario(nick) {
+	return await db.insertOne("usuarios", { nick: nick });
 }
 
 let buscarUsuario = async (iduser) => {

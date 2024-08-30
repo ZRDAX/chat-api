@@ -33,7 +33,7 @@ app.use(
 			await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			)
 		) {
 			let resp = await salaController.get();
@@ -47,7 +47,7 @@ app.use(
 app.use(
 	"/",
 	router.post("/entrar", async (req, res) => {
-		let resp = await usuarioController.entrar(req.body.nickname);
+		let resp = await usuarioController.entrar(req.body.nick);
 		res.status(200).send(resp);
 	}),
 );
@@ -59,7 +59,7 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			))
 		) {
 			return false;
@@ -79,13 +79,13 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			))
 		) {
 			return false;
 		}
 		let resp = await salaController.enviarMensagem(
-			req.headers.nickname,
+			req.headers.nick,
 			req.body.msg,
 			req.body.idsala,
 		);
@@ -100,7 +100,7 @@ app.use(
 			!(await token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			))
 		) {
 			return false;
@@ -120,7 +120,7 @@ app.use(
 			!token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			)
 		) {
 			return false;
@@ -137,7 +137,7 @@ app.use(
 			!token.checktoken(
 				req.headers.token,
 				req.headers.iduser,
-				req.headers.nickname,
+				req.headers.nick,
 			)
 		) {
 			return false;

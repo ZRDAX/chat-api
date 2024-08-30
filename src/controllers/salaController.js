@@ -5,7 +5,7 @@ exports.get = async (req, res) => {
 	return await salaModel.listarSalas();
 };
 
-exports.enviarMensagem = async (nickname, msg, idsala) => {
+exports.enviarMensagem = async (nick, msg, idsala) => {
 	const sala = await salaModel.buscarSala(idsala);
 	if (!sala.msgs) {
 		sala.msgs = [];

@@ -1,17 +1,17 @@
 const usuarioModel = require("../models/usuarioModel");
 const token = require("../../util/token");
 
-exports.entrar = async (nickname) => {
-	let resp = await usuarioModel.registrarUsuario(nickname);
+exports.entrar = async (nick) => {
+	let resp = await usuarioModel.registrarUsuario(nick);
 
 	if (resp.insertedId) {
 		return {
 			idUser: resp.insertedId,
 			token: await token.setToken(
 				JSON.stringify(resp.insertedId.toString()).replace(/"/g, ""),
-				nickname,
+				nick,
 			),
-			nickname: nickname,
+			nick: nick,
 		};
 	}
 };
