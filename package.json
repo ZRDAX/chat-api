@@ -1,7 +1,7 @@
 {
 	"name": "chat-api",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Api-chat demonstração",
 	"main": "index.js",
 	"scripts": {
 		"start": "node ./bin/server.js",
@@ -9,8 +9,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ZRDAX/chat-api/tree/master"
+		"url": "git+https://github.com/ZRDAX/chat-api.git"
 	},
+	"keywords": [
+    "chat",
+    "api",
+    "node"
+	],
 	"author": "Bryan (zrdax) Rochadel",
 	"license": "ISC",
 	"dependencies": {
