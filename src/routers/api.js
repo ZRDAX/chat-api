@@ -54,6 +54,26 @@ app.use(
 
 app.use(
 	"/",
+	router.post("/sala/criar", async (req, res) => {
+		const { nome, tipo, senha } = req.body;
+
+		if (
+			!(await token.checktoken(
+				req.headers.token,
+				req.headers.iduser,
+				req.headers.nick,
+			))
+		) {
+			return res.status(400).send({ msg: "Usuário não autorizado" });
+		}
+
+		let resp = await salaController.criarSala(nome, tipo, senha);
+		res.status(200).send(resp);
+	}),
+);
+
+app.use(
+	"/",
 	router.put("/sala/entrar", async (req, res) => {
 		if (
 			!(await token.checktoken(
@@ -117,11 +137,7 @@ app.use(
 	"/",
 	router.delete("/sala/sair", async (req, res) => {
 		if (
-			!token.checktoken(
-				req.headers.token,
-				req.headers.iduser,
-				req.headers.nick,
-			)
+			!token.checktoken(req.headers.token, req.headers.iduser, req.headers.nick)
 		) {
 			return false;
 		}
@@ -134,11 +150,7 @@ app.use(
 	"/",
 	router.delete("/sair", async (req, res) => {
 		if (
-			!token.checktoken(
-				req.headers.token,
-				req.headers.iduser,
-				req.headers.nick,
-			)
+			!token.checktoken(req.headers.token, req.headers.iduser, req.headers.nick)
 		) {
 			return false;
 		}

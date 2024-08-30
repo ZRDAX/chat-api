@@ -1,4 +1,4 @@
-const { Timestamp } = require("mongodb");
+//const { Timestamp } = require("mongodb");
 const salaModel = require("../models/salaModel");
 
 exports.get = async (req, res) => {
@@ -18,6 +18,14 @@ exports.enviarMensagem = async (nick, msg, idsala) => {
 	});
 	let resp = await salaModel.atualizarMensagens(sala);
 	return { msg: "OK", timestamp: timestamp };
+};
+
+exports.criarSala = async (nome, tipo, senha) => {
+	if (tipo === "privada" && !senha) {
+		return { msg: "Uma sala privada requer uma senha." };
+	}
+	const resp = await salaModel.criarSala(nome, tipo, senha);
+	return resp;
 };
 
 exports.entrar = async (iduser, idsala) => {
@@ -48,4 +56,5 @@ exports.sair = async (iduser, idsala) => {
 	if (await usuarioModel.alterarUsuario(user)) {
 		return { msg: "OK", timestamp: (timestamp = Date.now()) };
 	}
+	return false;
 };

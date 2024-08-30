@@ -11,11 +11,7 @@
 		"type": "git",
 		"url": "git+https://github.com/ZRDAX/chat-api.git"
 	},
-	"keywords": [
-    "chat",
-    "api",
-    "node"
-	],
+	"keywords": ["chat", "api", "node"],
 	"author": "Bryan (zrdax) Rochadel",
 	"license": "ISC",
 	"dependencies": {

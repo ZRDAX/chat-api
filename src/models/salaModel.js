@@ -21,6 +21,16 @@ let alterarUsuario = async (user) => {
 	return await db.updateOne("usuarios", user, { _id: user._id });
 };
 
+let criarSala = async (nome, tipo, senha = null) => {
+	const sala = {
+		nome: nome,
+		tipo: tipo,
+		senha: senha,
+		msgs: [],
+	};
+	return await db.insertOne("salas", sala);
+};
+
 let buscarMensagens = async (idsala, timestamp) => {
 	let sala = await buscarSala(idsala);
 	if (sala.msgs) {
@@ -42,4 +52,5 @@ module.exports = {
 	buscarUsuario,
 	alterarUsuario,
 	buscarSala,
+	criarSala,
 };
