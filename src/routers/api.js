@@ -141,7 +141,7 @@ app.use(
 		) {
 			return false;
 		}
-		const resp = await salaController.sair(req.query.iduser, req.query.idSala);
+		const resp = await salaController.sair(req.headers.iduser, req.query.idsala);
 		res.status(200).send(resp);
 	}),
 );
