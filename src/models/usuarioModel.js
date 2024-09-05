@@ -13,7 +13,7 @@ let alterarUsuario = async (user) => {
 };
 
 let removerUsuario = async (iduser) => {
-	return await db.deleteOne("usuario", iduser);
+	return await db.deleteOne("usuarios", iduser);
 };
 
 module.exports = {
