@@ -14,7 +14,7 @@ async function connect() {
 
 let findALL = async (Collection) => {
 	const db = await connect();
-	return await db.Collection(Collection).find().toArray();
+	return await db.collection(Collection).find().toArray();
 };
 
 async function insertOne(collection, objeto) {
